@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:quiz_app_test/model/model_quiz.dart';
+import 'package:quiz_app_test/widget/widget_candidate.dart';
 
 class QuizScreen extends StatefulWidget {
   List<Quiz> quizs;
@@ -91,7 +92,32 @@ class _QuizScreenState extends State<QuizScreen> {
   List<Widget> _buildCandidates(double width, Quiz quiz) {
     List<Widget> _children = [];
     for (int i = 0; i < 4; i ++) {
-      _children.add();
+      _children.add(
+        CandWidget(
+          index: i,
+          text: quiz.candidates[i],
+          width: width,
+          answerState:  _answerState[i],
+          tap: () {
+            setState(() {
+              for (int j = 0; j < 4; j ++) {
+                if (j == i) {
+                  _answerState[j] = true;
+                  _answers[_currentIndex] = j;
+                } else {
+                  _answerState[j] = false;
+                }
+              }
+            });
+          }
+        )
+      );
+      _children.add(
+        Padding(
+          padding: EdgeInsets.all(width * 0.024),
+        ),
+      );
     }
+    return _children;
   }
 }
