@@ -31,7 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
     double width = screenSize.width;
     double height = screenSize.height;
 
-    return SafeArea( // 기기의 상단 노티바 부분, 하단 영역을 침범하지않는 안전한 영역을 잡아 주는것
+    return WillPopScope(
+      onWillPop: () async => false,
       child: Scaffold(
         appBar: AppBar(
           title: Text('My Quiz App'),
